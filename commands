@@ -1,0 +1,11 @@
+
+# Temporary build commands > to be replaced by github images
+
+# Build local R mssql/mysql/maria image
+docker build -t r_mssql ./r_images/r_mssql/
+
+# Build local R oracle image
+docker build -t r_oracle ./r_images/r_oracle/
+
+# Build local R postgres image
+docker build -t r_postgres ./r_images/r_postgres/
