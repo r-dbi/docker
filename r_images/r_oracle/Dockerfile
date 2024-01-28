@@ -4,6 +4,7 @@ RUN mkdir -p /root/workspace
 
 RUN R -q -e 'pak::pkg_install("odbc")'
 RUN R -q -e 'pak::pkg_install("DBI")'
+RUN R -q -e 'pak::pkg_install("dm")'
 
 RUN apt-get update
 
@@ -38,8 +39,8 @@ RUN mkdir -p $(dirname $ODBC_FILE) && \
     { \
       echo "[oracle]"; \
       echo "Driver      = OracleODBC-19c"; \
-      echo "Server      = 127.0.0.1"; \
-      echo "ServerName  = //127.0.0.1:1521/FREE"; \
+      echo "Server      = oracle"; \
+      echo "ServerName  = //oracle:1521/FREE"; \
       echo "Port        = 1521"; \
       echo "Database    = FREE"; \
       echo ""; \
