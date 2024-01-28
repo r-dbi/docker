@@ -1,0 +1,50 @@
+
+version: '3'
+
+networks:
+  mysql-network:
+    driver: bridge
+
+services:
+
+# -- MYSQL SERVICE --
+  rdb_mysql:
+    container_name: rdb_mysql
+    image: r_mssql
+    platform: linux/amd64
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - mysql-network
+    volumes:
+      - .:/root/workspace
+    tty: true
+    stdin_open: true
+    # testing if connection works
+    # entrypoint: ["R"]
+    entrypoint: ["R", "-e", 'DBI::dbConnect(
+                                  RMariaDB::MariaDB(),
+                                  host = "mysql",
+                                  username = "compose",
+                                  password = "YourStrong!Passw0rd",
+                                  dbname = "test")']
+
+  mysql:
+    container_name: mysql
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "YourStrong!Passw0rd"
+      MYSQL_DATABASE: test
+      MYSQL_USER: compose
+      MYSQL_PASSWORD: "YourStrong!Passw0rd"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pYourStrong!Passw0rd"]
+      interval: 20s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+    ports:
+      - "3307:3306"
+    networks:
+      - mysql-network

@@ -1,0 +1,53 @@
+
+version: '3'
+volumes:
+  oracle-db:
+    driver: local
+
+networks:
+  oracle-network:
+    driver: bridge
+
+services:
+
+# -- ORACLE SERVICE --
+
+  rdb_oracle:
+    container_name: rdb_oracle
+    image: r_oracle
+    platform: linux/amd64
+    depends_on:
+      oracle:
+        condition: service_healthy
+    networks:
+      - oracle-network
+    volumes:
+      - .:/root/workspace
+    tty: true
+    stdin_open: true
+    # testing if connection works
+    # entrypoint: ["R"]
+    entrypoint: ["R", "-e", "DBI::dbConnect(odbc::odbc(),
+               UID='compose',
+               PWD='password1',
+               Driver = 'OracleODBC-19c')"]
+
+  #https://www.oracle.com/database/technologies/oracle-database-software-downloads.html#db_free
+  #entreprise version requires access and license
+  oracle:
+    image: container-registry.oracle.com/database/free:latest
+    #command: ["/bin/bash", "-c", "/oracle_init.sh"]
+    container_name: oracle
+    ports:
+      - "1521:1521"
+    networks:
+      - oracle-network
+    healthcheck:
+      test: ["CMD-SHELL", "cat /sql/init.sql | sqlplus -S SYS/Oradoc_db1 AS SYSDBA"]
+      interval: 30s
+      timeout: 3s
+      retries: 2
+      start_period: 30s
+    volumes:
+      - oracle-db:/opt/oracle/oradata
+      - ./init.sql:/sql/init.sql

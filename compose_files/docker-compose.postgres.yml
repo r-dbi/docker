@@ -1,0 +1,54 @@
+
+version: '3'
+volumes:
+  postgres-db:
+    driver: local
+
+networks:
+  postgres-network:
+    driver: bridge
+
+services:
+
+# -- POSTGRES SERVICE --
+
+  rdb_postgres:
+    container_name: rdb_postgres
+    image: r_postgres
+    platform: linux/amd64
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - postgres-network
+    volumes:
+      - .:/root/workspace
+    tty: true
+    stdin_open: true
+    # testing if connection works
+    # entrypoint: ["R"]
+    entrypoint: ["R", "-e", "DBI::dbConnect(
+                    RPostgres::Postgres(),
+                    host = 'postgres',
+                    user = 'compose',
+                    password = 'YourStrong!Passw0rd')"]
+
+  # https://geshan.com.np/blog/2021/12/docker-postgres/
+  postgres:
+    container_name: postgres
+    # FIXME: brittle tests fail with latest PostgreSQL
+    image: postgres:14
+    environment:
+      POSTGRES_USER: compose
+      POSTGRES_PASSWORD: "YourStrong!Passw0rd"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres-network
