@@ -78,8 +78,8 @@ jobs:
           context: .
           file: ./r_images/r_mssql/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
-          #tags: ${{ steps.meta.outputs.tags }}
-          tags: ghcr.io/${{ github.repository }}/r_mssql:latest
+          tags: ${{ steps.meta.outputs.tags }}
+          #tags: ghcr.io/${{ github.repository }}/r_mssql:latest
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
