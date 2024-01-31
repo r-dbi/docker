@@ -14,25 +14,19 @@ services:
 
   rdb_maria:
     container_name: rdb_maria
-    image: r_mssql
+    image: ghcr.io/krlmlr/rdb/r-mssql
     platform: linux/amd64
     depends_on:
       maria:
         condition: service_healthy
     networks:
       - maria-network
-    volumes:
-      - .:/root/workspace
     tty: true
     stdin_open: true
-    # testing if connection works
-    # entrypoint: ["R"]
-    entrypoint: ["R", "-e", 'DBI::dbConnect(
-                                  RMariaDB::MariaDB(),
-                                  host = "maria",
-                                  username = "compose",
-                                  password = "YourStrong!Passw0rd",
-                                  dbname = "test")']
+    volumes:
+      # simple test
+      - ./test/test-maria.R:/root/workspace/.Rprofile
+    entrypoint: ["R"]
 
   maria:
     container_name: maria

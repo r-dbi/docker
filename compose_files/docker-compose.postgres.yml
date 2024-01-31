@@ -14,24 +14,19 @@ services:
 
   rdb_postgres:
     container_name: rdb_postgres
-    image: r_postgres
+    image: ghcr.io/krlmlr/rdb/r-postgres
     platform: linux/amd64
     depends_on:
       postgres:
         condition: service_healthy
     networks:
       - postgres-network
-    volumes:
-      - .:/root/workspace
     tty: true
     stdin_open: true
-    # testing if connection works
-    # entrypoint: ["R"]
-    entrypoint: ["R", "-e", "DBI::dbConnect(
-                    RPostgres::Postgres(),
-                    host = 'postgres',
-                    user = 'compose',
-                    password = 'YourStrong!Passw0rd')"]
+    volumes:
+      # simple test
+      - ./test/test-postgres.R:/root/workspace/.Rprofile
+    entrypoint: ["R"]
 
   # https://geshan.com.np/blog/2021/12/docker-postgres/
   postgres:

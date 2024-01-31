@@ -14,29 +14,24 @@ services:
 
   rdb_oracle:
     container_name: rdb_oracle
-    image: r_oracle
+    image: ghcr.io/krlmlr/rdb/r-oracle
     platform: linux/amd64
+    tty: true
+    stdin_open: true
     depends_on:
       oracle:
         condition: service_healthy
     networks:
       - oracle-network
     volumes:
-      - .:/root/workspace
-    tty: true
-    stdin_open: true
-    # testing if connection works
-    # entrypoint: ["R"]
-    entrypoint: ["R", "-e", "DBI::dbConnect(odbc::odbc(),
-               UID='compose',
-               PWD='password1',
-               Driver = 'OracleODBC-19c')"]
+      # simple test
+      - ./test/test-oracle.R:/root/workspace/.Rprofile
+    entrypoint: ["R"]
 
   #https://www.oracle.com/database/technologies/oracle-database-software-downloads.html#db_free
   #entreprise version requires access and license
   oracle:
     image: container-registry.oracle.com/database/free:latest
-    #command: ["/bin/bash", "-c", "/oracle_init.sh"]
     container_name: oracle
     ports:
       - "1521:1521"

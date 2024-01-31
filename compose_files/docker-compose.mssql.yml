@@ -12,28 +12,19 @@ services:
 # -- MSSQL SERVICE --
   rdb_mssql:
     container_name: rdb_mssql
-    #image: ghcr.io/cynkra/dm:main
-    image: r_mssql
+    image: ghcr.io/krlmlr/rdb/r-mssql
     platform: linux/amd64
     depends_on:
       mssql:
         condition: service_healthy
     networks:
       - mssql-network
-    volumes:
-      - .:/root/workspace
     tty: true
     stdin_open: true
-    # entrypoint: ["R"]
-    entrypoint: ["R", "-e", "DBI::dbConnect(
-                    odbc::odbc(),
-                    driver = 'ODBC Driver 18 for SQL Server',
-                    server = 'mssql',
-                    database = 'test',
-                    uid = 'SA',
-                    pwd = 'YourStrong!Passw0rd',
-                    port = 1433,
-                    TrustServerCertificate = 'yes')"]
+    volumes:
+      # simple test
+      - ./test/test-mssql.R:/root/workspace/.Rprofile
+    entrypoint: ["R"]
 
   # https://blog.logrocket.com/docker-sql-server/
   mssql:
