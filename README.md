@@ -1,9 +1,3 @@
----
-editor_options: 
-  markdown: 
-    wrap: 72
----
-
 # rdb
 
 Repository of Docker Images necessary to test dm and DBI packages.
