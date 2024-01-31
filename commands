@@ -13,9 +13,16 @@ docker build -t r_postgres ./r_images/r_postgres/
 # Run from custom compose files
 
 docker-compose -f compose_files/docker-compose.mssql.yml run rdb_mssql
+docker-compose -f compose_files/docker-compose.mssql.yml down --volumes
+
 docker-compose -f compose_files/docker-compose.mysql.yml run rdb_mysql
+docker-compose -f compose_files/docker-compose.mysql.yml down --volumes
+
 docker-compose -f compose_files/docker-compose.maria.yml run rdb_maria
+docker-compose -f compose_files/docker-compose.maria.yml down --volumes
+
 docker-compose -f compose_files/docker-compose.postgres.yml run rdb_postgres
+docker-compose -f compose_files/docker-compose.postgres.yml down --volumes
 
 docker-compose -f compose_files/docker-compose.oracle.yml run rdb_oracle
 docker-compose -f compose_files/docker-compose.oracle.yml down --volumes
