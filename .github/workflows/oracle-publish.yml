@@ -10,6 +10,8 @@ on:
     - cron: '0 1 * * *'
   push:
     branches: [ "main" ]
+    paths:
+      - './r_images/r_oracle/Dockerfile'
     # Publish semver tags as releases.
     tags: [ 'v*.*.*' ]
   pull_request:
