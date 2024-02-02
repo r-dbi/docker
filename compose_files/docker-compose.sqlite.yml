@@ -12,8 +12,8 @@ services:
     container_name: rdb_sqlite
     image: ghcr.io/krlmlr/rdb/r-sqlite
     platform: linux/amd64
-    depends_on:
-      - sqlite
+    # depends_on:
+    #   - sqlite
     tty: true
     stdin_open: true
     volumes:
@@ -21,14 +21,14 @@ services:
       - ./test/test-sqlite.R:/root/workspace/.Rprofile
     entrypoint: ["R"]
 
-  sqlite:
-    container_name: sqlite
-    #https://github.com/KEINOS/Dockerfile_of_SQLite3 - built weekly
-    image: keinos/sqlite3:latest
-    volumes:
-      - ./data:/data
-    working_dir: /data
-    command: sqlite3
-    stdin_open: true
-    tty: true
+  # sqlite:
+  #   container_name: sqlite
+  #   #https://github.com/KEINOS/Dockerfile_of_SQLite3 - built weekly
+  #   image: keinos/sqlite3:latest
+  #   volumes:
+  #     - ./data:/data
+  #   working_dir: /data
+  #   command: sqlite3
+  #   stdin_open: true
+  #   tty: true
 

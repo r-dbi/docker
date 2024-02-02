@@ -22,6 +22,7 @@ By launching an R container linked to the respective database container, we can 
 -   `Oracle`: developed by Oracle.
 -   `PostgreSQL`: developed by PostgreSQL Global Development Group, open-source.
 -   `SQLite`: developed by D. Richard Hipp, open-source, file-based, and designed to be embedded into applications.
+-   `DuckDB`: developed by the CWI Database Architectures group, open-source.
 
 ### R Images for testing purposes
 
@@ -47,6 +48,12 @@ By launching an R container linked to the respective database container, we can 
 
     ```         
     docker pull ghcr.io/krlmlr/rdb/r-sqlite:latest
+    ```
+    
+-   `r-duckdb` with the necessary packages and libraries to test connections to an DuckDB database.
+
+    ```         
+    docker pull ghcr.io/krlmlr/rdb/r-duckdb:latest
     ```
 
 R images are based on [rig-ubuntu](https://github.com/cynkra/rig-ubuntu/pkgs/container/rig-ubuntu), built daily at midnight UTC.
@@ -137,4 +144,16 @@ Stop Containers
 docker-compose -f compose_files/docker-compose.sqlite.yml down #--volumes
 ```
 
-## 
+### DuckDB Database & R
+
+Start Containers
+
+``` r
+docker-compose -f compose_files/docker-compose.duckdb.yml run rdb_duckdb
+```
+
+Stop Containers
+
+``` r
+docker-compose -f compose_files/docker-compose.duckdb.yml down #--volumes
+```

@@ -1,0 +1,22 @@
+
+version: '3'
+volumes:
+  duckdb-db:
+    driver: local
+
+services:
+
+# -- DUCKDB SERVICE --
+
+  rdb_duckdb:
+    container_name: rdb_duckdb
+    image: ghcr.io/krlmlr/rdb/r-duckdb
+    platform: linux/amd64
+    tty: true
+    stdin_open: true
+    volumes:
+      # simple test
+      - ./test/test-duckdb.R:/root/workspace/.Rprofile
+    entrypoint: ["R"]
+
+
