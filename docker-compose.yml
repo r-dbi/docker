@@ -1,0 +1,11 @@
+# https://www.docker.com/blog/improve-docker-compose-modularity-with-include/
+
+version: '3'
+include:
+  - compose_files/docker-compose.duckdb.yml
+  - compose_files/docker-compose.maria.yml
+  - compose_files/docker-compose.mssql.yml
+  - compose_files/docker-compose.mysql.yml
+  - compose_files/docker-compose.oracle.yml
+  - compose_files/docker-compose.postgres.yml
+  - compose_files/docker-compose.sqlite.yml
