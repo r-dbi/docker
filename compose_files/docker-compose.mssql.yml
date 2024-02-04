@@ -38,7 +38,6 @@ services:
       # test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "YourStrong!Passw0rd" -Q "SELECT 1" -b -o /dev/null
       test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "YourStrong!Passw0rd" -Q "IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'test') BEGIN CREATE DATABASE test; END ELSE BEGIN SELECT 1; END;" -b -o /dev/null
       start_period: 4s
-      start_interval: 1s
       interval: 0.2s
       timeout: 5s
       retries: 100

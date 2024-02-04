@@ -10,7 +10,7 @@ services:
 # -- MYSQL SERVICE --
   rdb_mysql:
     container_name: rdb_mysql
-    image: ghcr.io/krlmlr/rdb/r-mssql
+    image: ghcr.io/krlmlr/rdb/r-mysql
     platform: linux/amd64
     depends_on:
       mysql:
@@ -34,9 +34,8 @@ services:
       MYSQL_PASSWORD: "YourStrong!Passw0rd"
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pYourStrong!Passw0rd"]
-      start_period: 4s
-      start_interval: 1s
-      interval: 0.2s
+      start_period: 20s
+      interval: 20s
       timeout: 5s
       retries: 100
     ports:

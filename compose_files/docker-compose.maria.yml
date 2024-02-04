@@ -14,7 +14,7 @@ services:
 
   rdb_maria:
     container_name: rdb_maria
-    image: ghcr.io/krlmlr/rdb/r-mssql
+    image: ghcr.io/krlmlr/rdb/r-maria
     platform: linux/amd64
     depends_on:
       maria:
@@ -40,8 +40,7 @@ services:
       - maria-db:/var/lib/mysql
     healthcheck:
       test: [ "CMD", "healthcheck.sh", "--su-mysql", "--connect", "--innodb_initialized" ]
-      start_period: 4s
-      start_interval: 1s
+      start_period: 10s
       interval: 0.2s
       timeout: 5s
       retries: 100

@@ -1,28 +1,35 @@
 
 # Temporary build commands > to be replaced by github images
-
-# Build local R mssql/mysql/maria image
-docker build -t r_mssql ./r_images/r_mssql/
-
-# Build local R oracle image
-docker build -t r_oracle ./r_images/r_oracle/
-
-# Build local R postgres image
-docker build -t r_postgres ./r_images/r_postgres/
+(for local testing)
 
 # Run from custom compose files
 
-docker-compose -f compose_files/docker-compose.mssql.yml run rdb_mssql
-docker-compose -f compose_files/docker-compose.mssql.yml down --volumes
+docker-compose down --volumes
 
-docker-compose -f compose_files/docker-compose.mysql.yml run rdb_mysql
-docker-compose -f compose_files/docker-compose.mysql.yml down --volumes
+docker-compose run rdb_mysql
+docker-compose down mysql --volumes
 
-docker-compose -f compose_files/docker-compose.maria.yml run rdb_maria
-docker-compose -f compose_files/docker-compose.maria.yml down --volumes
+docker-compose run rdb_mssql
+docker-compose down mssql --volumes
 
-docker-compose -f compose_files/docker-compose.postgres.yml run rdb_postgres
-docker-compose -f compose_files/docker-compose.postgres.yml down --volumes
+docker-compose run rdb_maria
+docker-compose down maria --volumes
 
-docker-compose -f compose_files/docker-compose.oracle.yml run rdb_oracle
-docker-compose -f compose_files/docker-compose.oracle.yml down --volumes
+docker-compose run rdb_postgres
+docker-compose down postgres --volumes
+
+docker-compose run rdb_oracle
+docker-compose down oracle --volumes
+
+docker-compose run rdb_duckdb
+
+docker-compose run rdb_sqlite
+
+# Build local R images
+docker build -t r-mssql ./r_images/r_mssql/
+docker build -t r-oracle ./r_images/r_oracle/
+docker build -t r-postgres ./r_images/r_postgres/
+docker build -t r-mysql ./r_images/r_mysql/
+docker build -t r-maria ./r_images/r_maria/
+docker build -t r-duckdb ./r_images/r_duckdb/
+docker build -t r-sqlite ./r_images/r_sqlite/
