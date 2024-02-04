@@ -34,10 +34,11 @@ services:
       MYSQL_PASSWORD: "YourStrong!Passw0rd"
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pYourStrong!Passw0rd"]
-      interval: 20s
-      timeout: 10s
-      retries: 3
-      start_period: 5s
+      start_period: 4s
+      start_interval: 1s
+      interval: 0.2s
+      timeout: 5s
+      retries: 100
     ports:
       - "3307:3306"
     networks:

@@ -20,15 +20,3 @@ services:
       # simple test
       - ./test/test-sqlite.R:/root/workspace/.Rprofile
     entrypoint: ["R"]
-
-  # sqlite:
-  #   container_name: sqlite
-  #   #https://github.com/KEINOS/Dockerfile_of_SQLite3 - built weekly
-  #   image: keinos/sqlite3:latest
-  #   volumes:
-  #     - ./data:/data
-  #   working_dir: /data
-  #   command: sqlite3
-  #   stdin_open: true
-  #   tty: true
-
