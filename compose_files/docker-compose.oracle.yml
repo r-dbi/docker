@@ -39,11 +39,10 @@ services:
       - oracle-network
     healthcheck:
       test: ["CMD-SHELL", "cat /sql/init.sql | sqlplus -S SYS/Oradoc_db1 AS SYSDBA"]
-      start_period: 4s
-      start_interval: 1s
-      interval: 0.2s
+      start_period: 30s
+      interval: 10s
       timeout: 5s
-      retries: 100
+      retries: 10
     volumes:
       - oracle-db:/opt/oracle/oradata
       - ./init.sql:/sql/init.sql
