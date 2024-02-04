@@ -28,31 +28,31 @@ By launching an R container linked to the respective database container, we can 
 
 -   `r-mssql` with the necessary packages and libraries to test connections to a Microsoft SQL Server database, MySQL and MariaDB.
 
-    ```         
+    ```sh
     docker pull ghcr.io/krlmlr/rdb/r-mssql:latest
     ```
 
 -   `r-postgres` with the necessary packages and libraries to test connections to a PostgreSQL database.
 
-    ```         
+    ```sh
     docker pull ghcr.io/krlmlr/rdb/r-postgres:latest
     ```
 
 -   `r-oracle` with the necessary packages and libraries to test connections to an Oracle database.
 
-    ```         
+    ```sh
     docker pull ghcr.io/krlmlr/rdb/r-oracle:latest
     ```
 
 -   `r-sqlite` with the necessary packages and libraries to test connections to an SQLite database.
 
-    ```         
+    ```sh
     docker pull ghcr.io/krlmlr/rdb/r-sqlite:latest
     ```
-    
+
 -   `r-duckdb` with the necessary packages and libraries to test connections to an DuckDB database.
 
-    ```         
+    ```sh
     docker pull ghcr.io/krlmlr/rdb/r-duckdb:latest
     ```
 
@@ -64,96 +64,99 @@ R images are based on [rig-ubuntu](https://github.com/cynkra/rig-ubuntu/pkgs/con
 
 Launch Containers
 
-``` r
-docker-compose -f compose_files/docker-compose.mssql.yml run rdb_mssql 
+```sh
+docker-compose run rdb_mssql
 ```
 
 Stop Containers
 
-``` r
-docker-compose -f compose_files/docker-compose.mssql.yml down #--volumes
+```sh
+docker-compose down mssql #--volumes
 ```
 
 ### MYSQL & R
 
 Launch Containers
 
-``` r
-docker-compose -f compose_files/docker-compose.mysql.yml run rdb_mysql 
+```sh
+docker-compose run rdb_mysql
 ```
 
 Stop Containers
 
-``` r
-docker-compose -f compose_files/docker-compose.mysql.yml down #--volumes
+```sh
+docker-compose down mysql #--volumes
 ```
 
 ### MariaDB & R
 
 Launch Containers
 
-``` r
-docker-compose -f compose_files/docker-compose.maria.yml run rdb_maria 
+```sh
+docker-compose run rdb_maria
 ```
 
 Stop Containers
 
-``` r
-docker-compose -f compose_files/docker-compose.maria.yml down #--volumes
+```sh
+docker-compose down maria #--volumes
 ```
 
 ### PostgreSQL & R
 
 Launch Containers
 
-``` r
-docker-compose -f compose_files/docker-compose.postgres.yml run rdb_postgres 
+```sh
+docker-compose run rdb_postgres
 ```
 
 Stop Containers
 
-``` r
-docker-compose -f compose_files/docker-compose.postgres.yml down #--volumes
+```sh
+docker-compose down postgres #--volumes
 ```
 
 ### Oracle Database & R
 
 Start Containers
 
-``` r
-docker-compose -f compose_files/docker-compose.oracle.yml run rdb_oracle 
+```sh
+docker-compose run rdb_oracle
 ```
 
 Stop Containers
 
-``` r
-docker-compose -f compose_files/docker-compose.oracle.yml down #--volumes
+```sh
+docker-compose down oracle #--volumes
 ```
 
 ### SQLite Database & R
 
 Start Containers
 
-``` r
-docker-compose -f compose_files/docker-compose.sqlite.yml run rdb_sqlite
+```sh
+docker-compose run rdb_sqlite
 ```
 
-Stop Containers
-
-``` r
-docker-compose -f compose_files/docker-compose.sqlite.yml down #--volumes
-```
+No containers to stop.
 
 ### DuckDB Database & R
 
 Start Containers
 
-``` r
-docker-compose -f compose_files/docker-compose.duckdb.yml run rdb_duckdb
+```sh
+docker-compose run rdb_duckdb
 ```
 
-Stop Containers
+No containers to stop.
 
-``` r
-docker-compose -f compose_files/docker-compose.duckdb.yml down #--volumes
+## Development
+
+The main `docker-compose.yml` merely includes files in `docker-compose/` .
+For new services, create a new file.
+
+### Pull all images
+
+```sh
+docker-compose pull
 ```
