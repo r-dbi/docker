@@ -23,7 +23,7 @@ env:
 
 
 jobs:
-  build-r-mysql::
+  build-r-mysql:
 
     runs-on: ubuntu-latest
     permissions:
