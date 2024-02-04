@@ -2,8 +2,7 @@ FROM ghcr.io/cynkra/rig-ubuntu:main
 
 RUN mkdir -p /root/workspace
 
-RUN R -q -e 'pak::pkg_install("DBI")'
-RUN R -q -e 'pak::pkg_install("dm")'
-RUN R -q -e 'pak::pkg_install("duckdb")'
+RUN apt-get update
 
-RUN apt-get install -y gnupg lsb-release time
+RUN R -e "install.packages('DBI')"
+RUN R -e "install.packages('duckdb')"
