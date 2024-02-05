@@ -10,7 +10,7 @@ on:
     - cron: '30 1 * * *'
   push:
     branches: [ "main" ]
-    # Publish server tags as releases.
+    # Publish semver tags as releases.
     tags: [ 'v*.*.*' ]
   pull_request:
     branches: [ "main" ]
@@ -23,8 +23,10 @@ env:
 
 
 jobs:
-  build-r-mysql:
-
+  build-oracle:
+    strategy:
+      matrix:
+        db: [oracle, adbi]
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -76,11 +78,10 @@ jobs:
         uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09 # v5.0.0
         with:
           context: .
-          file: ./r_images/r_mysql/Dockerfile
+          file: ./r_images/r_${{ matrix.db }}/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ghcr.io/${{ github.repository }}/r-mysql:latest
+          tags: ghcr.io/${{ github.repository }}/r-${{ matrix.db }}:latest
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-     
