@@ -10,7 +10,7 @@ on:
     - cron: '30 1 * * *'
   push:
     branches: [ "main" ]
-    # Publish semver tags as releases.
+    # Publish server tags as releases.
     tags: [ 'v*.*.*' ]
   pull_request:
     branches: [ "main" ]
@@ -23,10 +23,10 @@ env:
 
 
 jobs:
-  build-oracle:
+  build-all-db:
     strategy:
       matrix:
-        db: [oracle, adbi]
+        db: [adbi, duckdb, maria, mssql, mysql, oracle, postgres, sqlite]
     runs-on: ubuntu-latest
     permissions:
       contents: read
