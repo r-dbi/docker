@@ -7,7 +7,7 @@ con <- try(DBI::dbConnect(
   RPostgres::Postgres(),
   host = 'postgres',
   user = 'compose',
-  password = 'YourStrong!Passw0rd'), silent = T)
+  password = 'YourStrong!Passw0rd'), silent = F)
 
 if(class(con) == "try-error"){
   print('Incorrect Setup.')

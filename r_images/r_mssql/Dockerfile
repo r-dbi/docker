@@ -1,4 +1,4 @@
-FROM ghcr.io/cynkra/rig-ubuntu:main
+FROM ghcr.io/cynkra/rig-ubuntu-dbi:main
 
 RUN mkdir -p /root/workspace
 
@@ -12,7 +12,4 @@ RUN curl https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/prod.li
 RUN apt-get update
 
 RUN ACCEPT_EULA=Y apt-get install -y msodbcsql18
-
-RUN apt-get install -y unixodbc
-RUN R -e "install.packages('odbc')"
 

@@ -1,11 +1,6 @@
-FROM ghcr.io/cynkra/rig-ubuntu:main
+FROM ghcr.io/cynkra/rig-ubuntu-dbi:main
 
 RUN mkdir -p /root/workspace
-
-RUN apt-get update && \
-    apt-get install -y unixodbc
-
-RUN R -e "install.packages('odbc')"
 
 WORKDIR /opt/oracle/
 

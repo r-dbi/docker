@@ -11,7 +11,7 @@ con <- try(DBI::dbConnect(
   uid = 'SA',
   pwd = 'YourStrong!Passw0rd',
   port = 1433,
-  TrustServerCertificate = 'yes'), silent = T)
+  TrustServerCertificate = 'yes'), silent = FALSE)
 
 if(class(con) == "try-error"){
   print('Incorrect Setup.')
