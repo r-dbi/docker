@@ -25,6 +25,8 @@ docker-compose run rdb_duckdb
 
 docker-compose run rdb_sqlite
 
+docker-compose run rdb_adbi
+
 # Build local R images
 docker build -t r-mssql ./r_images/r_mssql/
 docker build -t r-oracle ./r_images/r_oracle/
@@ -33,3 +35,6 @@ docker build -t r-mysql ./r_images/r_mysql/
 docker build -t r-maria ./r_images/r_maria/
 docker build -t r-duckdb ./r_images/r_duckdb/
 docker build -t r-sqlite ./r_images/r_sqlite/
+docker build -t r-adbi ./r_images/r_adbi/
+
+

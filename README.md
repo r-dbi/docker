@@ -23,40 +23,47 @@ By launching an R container linked to the respective database container, we can 
 -   `PostgreSQL`: developed by PostgreSQL Global Development Group, open-source.
 -   `SQLite`: developed by D. Richard Hipp, open-source, file-based, and designed to be embedded into applications.
 -   `DuckDB`: developed by the CWI Database Architectures group, open-source.
+-   `ADBC` is a developing open-source standard designed to facilitate database interactions using the Apache Arrow framework.
 
 ### R Images for testing purposes
 
 -   `r-mssql` with the necessary packages and libraries to test connections to a Microsoft SQL Server database, MySQL and MariaDB.
 
-    ```sh
+    ``` sh
     docker pull ghcr.io/krlmlr/rdb/r-mssql:latest
     ```
 
 -   `r-postgres` with the necessary packages and libraries to test connections to a PostgreSQL database.
 
-    ```sh
+    ``` sh
     docker pull ghcr.io/krlmlr/rdb/r-postgres:latest
     ```
 
 -   `r-oracle` with the necessary packages and libraries to test connections to an Oracle database.
 
-    ```sh
+    ``` sh
     docker pull ghcr.io/krlmlr/rdb/r-oracle:latest
     ```
 
 -   `r-sqlite` with the necessary packages and libraries to test connections to an SQLite database.
 
-    ```sh
+    ``` sh
     docker pull ghcr.io/krlmlr/rdb/r-sqlite:latest
     ```
 
 -   `r-duckdb` with the necessary packages and libraries to test connections to an DuckDB database.
 
-    ```sh
+    ``` sh
     docker pull ghcr.io/krlmlr/rdb/r-duckdb:latest
     ```
+    
+-   `r-adbi` with the necessary packages and libraries to test connections to an ADBC database.
 
-R images are based on [rig-ubuntu](https://github.com/cynkra/rig-ubuntu/pkgs/container/rig-ubuntu), built daily at midnight UTC.
+    ``` sh
+    docker pull ghcr.io/krlmlr/rdb/r-adbi:latest
+    ```
+
+R images are based on [rig-ubuntu-dbi](https://github.com/cynkra/rig-ubuntu-dbi), built daily at midnight UTC.
 
 ## Usage
 
@@ -64,13 +71,13 @@ R images are based on [rig-ubuntu](https://github.com/cynkra/rig-ubuntu/pkgs/con
 
 Launch Containers
 
-```sh
+``` sh
 docker-compose run rdb_mssql
 ```
 
 Stop Containers
 
-```sh
+``` sh
 docker-compose down mssql #--volumes
 ```
 
@@ -78,13 +85,13 @@ docker-compose down mssql #--volumes
 
 Launch Containers
 
-```sh
+``` sh
 docker-compose run rdb_mysql
 ```
 
 Stop Containers
 
-```sh
+``` sh
 docker-compose down mysql #--volumes
 ```
 
@@ -92,13 +99,13 @@ docker-compose down mysql #--volumes
 
 Launch Containers
 
-```sh
+``` sh
 docker-compose run rdb_maria
 ```
 
 Stop Containers
 
-```sh
+``` sh
 docker-compose down maria #--volumes
 ```
 
@@ -106,13 +113,13 @@ docker-compose down maria #--volumes
 
 Launch Containers
 
-```sh
+``` sh
 docker-compose run rdb_postgres
 ```
 
 Stop Containers
 
-```sh
+``` sh
 docker-compose down postgres #--volumes
 ```
 
@@ -120,13 +127,13 @@ docker-compose down postgres #--volumes
 
 Start Containers
 
-```sh
+``` sh
 docker-compose run rdb_oracle
 ```
 
 Stop Containers
 
-```sh
+``` sh
 docker-compose down oracle #--volumes
 ```
 
@@ -134,7 +141,7 @@ docker-compose down oracle #--volumes
 
 Start Containers
 
-```sh
+``` sh
 docker-compose run rdb_sqlite
 ```
 
@@ -144,19 +151,26 @@ No containers to stop.
 
 Start Containers
 
-```sh
+``` sh
 docker-compose run rdb_duckdb
+```
+
+### ADBC Database & R
+
+Start Containers
+
+``` sh
+docker-compose run rdb_adbi
 ```
 
 No containers to stop.
 
 ## Development
 
-The main `docker-compose.yml` merely includes files in `docker-compose/` .
-For new services, create a new file.
+The main `docker-compose.yml` merely includes files in `docker-compose/` . For new services, create a new file.
 
 ### Pull all images
 
-```sh
+``` sh
 docker-compose pull
 ```

@@ -1,0 +1,22 @@
+
+version: '3'
+volumes:
+  adbi-db:
+    driver: local
+
+services:
+
+# -- ADBI SERVICE --
+
+  rdb_adbi:
+    container_name: rdb_adbi
+    image: ghcr.io/krlmlr/rdb/r-adbi
+    platform: linux/amd64
+    tty: true
+    stdin_open: true
+    volumes:
+      # simple test
+      - ./test/test-adbi.R:/root/workspace/.Rprofile
+    entrypoint: ["R"]
+
+
