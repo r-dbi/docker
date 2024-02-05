@@ -2,8 +2,6 @@ FROM ghcr.io/cynkra/rig-ubuntu-dbi:main
 
 RUN mkdir -p /root/workspace
 
-RUN apt-get install -y gnupg lsb-release time
-
 # https://learn.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-ver16&tabs=ubuntu18-install%2Calpine17-install%2Cdebian8-install%2Credhat7-13-install%2Crhel7-offline
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
 
