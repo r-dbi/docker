@@ -21,6 +21,11 @@ services:
         condition: service_healthy
     networks:
       - postgres-network
+    environment:
+      - PGHOST=postgres
+      - PGPORT=5432
+      - PGUSER=compose
+      - PGPASSWORD=YourStrong!Passw0rd
     tty: true
     stdin_open: true
     volumes:
@@ -37,6 +42,11 @@ services:
         condition: service_healthy
     networks:
       - postgres-network
+    environment:
+      - PGHOST=postgres
+      - PGPORT=5432
+      - PGUSER=compose
+      - PGPASSWORD=YourStrong!Passw0rd
     tty: true
     stdin_open: true
     volumes:
