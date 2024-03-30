@@ -12,6 +12,22 @@ services:
 
 # -- POSTGRES SERVICE --
 
+  rdb_postgres_test:
+    container_name: rdb_postgres_test
+    image: ghcr.io/krlmlr/rdb/r-postgres
+    platform: linux/amd64
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - postgres-network
+    tty: true
+    stdin_open: true
+    volumes:
+      # simple test
+      - ./test/test-postgres.R:/root/workspace/test.R
+    entrypoint: ["Rscript", "/root/workspace/test.R"]
+
   rdb_postgres:
     container_name: rdb_postgres
     image: ghcr.io/krlmlr/rdb/r-postgres
@@ -24,8 +40,7 @@ services:
     tty: true
     stdin_open: true
     volumes:
-      # simple test
-      - ./test/test-postgres.R:/root/workspace/.Rprofile
+      - ../r-dbi/RPostgres/:/root/workspace/
     entrypoint: ["R"]
 
   # https://geshan.com.np/blog/2021/12/docker-postgres/
