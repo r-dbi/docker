@@ -1,12 +1,8 @@
 
 version: '3'
-volumes:
-  oracle-db:
-    driver: local
 
-networks:
-  oracle-network:
-    driver: bridge
+include:
+- docker-compose.db-oracle.yml
 
 services:
 
@@ -27,22 +23,3 @@ services:
       # simple test
       - ./test/test-oracle.R:/root/workspace/.Rprofile
     entrypoint: ["R"]
-
-  #https://www.oracle.com/database/technologies/oracle-database-software-downloads.html#db_free
-  #entreprise version requires access and license
-  oracle:
-    image: container-registry.oracle.com/database/free:latest
-    container_name: oracle
-    ports:
-      - "1521:1521"
-    networks:
-      - oracle-network
-    healthcheck:
-      test: ["CMD-SHELL", "cat /sql/init.sql | sqlplus -S SYS/Oradoc_db1 AS SYSDBA"]
-      start_period: 30s
-      interval: 10s
-      timeout: 5s
-      retries: 10
-    volumes:
-      - oracle-db:/opt/oracle/oradata
-      - ./init.sql:/sql/init.sql
