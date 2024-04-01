@@ -9,7 +9,7 @@ services:
 # -- MARIA SERVICE --
 
   rdb_maria_test:
-    container_name: rdb_maria
+    container_name: rdb_maria_test
     image: ghcr.io/krlmlr/rdb/r-maria
     platform: linux/amd64
     depends_on:
@@ -23,3 +23,18 @@ services:
       # simple test
       - ./test/test-maria.R:/root/workspace/test.R
     entrypoint: ["Rscript", "/root/workspace/test.R"]
+
+  rdb_maria:
+    container_name: rdb_maria
+    image: ghcr.io/krlmlr/rdb/r-maria
+    platform: linux/amd64
+    depends_on:
+      maria:
+        condition: service_healthy
+    networks:
+      - maria-network
+    tty: true
+    stdin_open: true
+    volumes:
+      - ../r-dbi/RMariaDB/:/root/workspace/
+    entrypoint: ["R"]
