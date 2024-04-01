@@ -1,12 +1,8 @@
 
 version: '3'
-volumes:
-  maria-db:
-    driver: local
 
-networks:
-  maria-network:
-    driver: bridge
+include:
+- docker-compose.db-maria.yml
 
 services:
 
@@ -27,24 +23,3 @@ services:
       # simple test
       - ./test/test-maria.R:/root/workspace/.Rprofile
     entrypoint: ["R"]
-
-  maria:
-    container_name: maria
-    image: mariadb
-    environment:
-      MARIADB_ROOT_PASSWORD: "YourStrong!Passw0rd"
-      MARIADB_DATABASE: test
-      MARIADB_USER: compose
-      MARIADB_PASSWORD: "YourStrong!Passw0rd"
-    volumes:
-      - maria-db:/var/lib/mysql
-    healthcheck:
-      test: [ "CMD", "healthcheck.sh", "--su-mysql", "--connect", "--innodb_initialized" ]
-      start_period: 10s
-      interval: 0.2s
-      timeout: 5s
-      retries: 100
-    ports:
-      - "3306:3306"
-    networks:
-      - maria-network
