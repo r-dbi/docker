@@ -6,13 +6,9 @@ Repository of Docker Images for testing database packages, including dm.
 
 Testing an R package that connects to a database can be a challenge. The package must be tested against different databases, different versions of the same database, and different operating systems. This can be a time-consuming process, especially if you don't have access to a database server.
 
-The purpose of this repository is to provide a set of Docker images that can will used to test the `dm` and `DBI` packages.
-
-Each docker image is based on the latest R version and contains the necessary packages to test database connections.
-
-Docker compose files will be used to create a container for each database and run the tests from freshly built R images.
-
-By launching an R container linked to the respective database container, we can run the tests against the database.
+This repository offers a solution based on Docker Compose.
+Docker images are defined for each component and for each database.
+A hierarchy of Docker Compose files helps combine the components and databases to run tests without altering the development environment.
 
 ### Databases Covered:
 
@@ -24,46 +20,6 @@ By launching an R container linked to the respective database container, we can 
 -   `SQLite`: developed by D. Richard Hipp, open-source, file-based, and designed to be embedded into applications.
 -   `DuckDB`: developed by the CWI Database Architectures group, open-source.
 -   `ADBC` is a developing open-source standard designed to facilitate database interactions using the Apache Arrow framework.
-
-### R Images for testing purposes
-
--   `r-mssql` with the necessary packages and libraries to test connections to a Microsoft SQL Server database, MySQL and MariaDB.
-
-    ``` sh
-    docker pull ghcr.io/krlmlr/rdb/r-mssql:latest
-    ```
-
--   `r-postgres` with the necessary packages and libraries to test connections to a PostgreSQL database.
-
-    ``` sh
-    docker pull ghcr.io/krlmlr/rdb/r-postgres:latest
-    ```
-
--   `r-oracle` with the necessary packages and libraries to test connections to an Oracle database.
-
-    ``` sh
-    docker pull ghcr.io/krlmlr/rdb/r-oracle:latest
-    ```
-
--   `r-sqlite` with the necessary packages and libraries to test connections to an SQLite database.
-
-    ``` sh
-    docker pull ghcr.io/krlmlr/rdb/r-sqlite:latest
-    ```
-
--   `r-duckdb` with the necessary packages and libraries to test connections to an DuckDB database.
-
-    ``` sh
-    docker pull ghcr.io/krlmlr/rdb/r-duckdb:latest
-    ```
-    
--   `r-adbi` with the necessary packages and libraries to test connections to an ADBC database.
-
-    ``` sh
-    docker pull ghcr.io/krlmlr/rdb/r-adbi:latest
-    ```
-
-R images are based on [rig-ubuntu-dbi](https://github.com/cynkra/rig-ubuntu-dbi), built daily at midnight UTC.
 
 ## Usage
 
@@ -173,4 +129,12 @@ The main `docker-compose.yml` merely includes files in `docker-compose/` . For n
 
 ``` sh
 docker-compose pull
+```
+
+### Pull individual images
+
+Example: pull images necessary to run tests against Oracle.
+
+``` sh
+docker-compose pull oracle rdb_oracle
 ```
