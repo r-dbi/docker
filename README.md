@@ -1,6 +1,6 @@
 # rdb
 
-Repository of Docker Images necessary to test dm and DBI packages.
+Repository of Docker Images for testing database packages, including dm.
 
 ## Overview
 
