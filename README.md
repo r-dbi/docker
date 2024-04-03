@@ -15,7 +15,8 @@ A hierarchy of Docker Compose files helps combine the components and databases t
 -   `Microsoft SQL Server`: developed by Microsoft.
 -   `MySQL`: developed by Oracle, open-source.
 -   `MariaDB`: developed by MariaDB Corporation Ab, open-source.
--   `Oracle`: developed by Oracle.
+-   `Oracle Database Free`: developed by Oracle.
+-   `Oracle Database Express Edition`: developed by Oracle.
 -   `PostgreSQL`: developed by PostgreSQL Global Development Group, open-source.
 -   `SQLite`: developed by D. Richard Hipp, open-source, file-based, and designed to be embedded into applications.
 -   `DuckDB`: developed by the CWI Database Architectures group, open-source.
@@ -83,14 +84,22 @@ docker-compose down postgres #--volumes
 
 Start Containers
 
+Oracle Database Free	
 ``` sh
 docker-compose run rdb_oracle
+```
+Oracle Database Express Edition
+``` sh
+docker-compose run rdb_oracle-xe
 ```
 
 Stop Containers
 
 ``` sh
 docker-compose down oracle #--volumes
+```
+``` sh
+docker-compose down oracle-xe #--volumes
 ```
 
 ### SQLite Database & R
