@@ -26,7 +26,7 @@ jobs:
   build-all-db:
     strategy:
       matrix:
-        db: [adbi, duckdb, maria, mssql, mysql, oracle, postgres, sqlite]
+        db: [adbi, duckdb, maria, mssql, mysql, oracle, postgres, sqlite, oracle-xe]
     runs-on: ubuntu-latest
     permissions:
       contents: read
