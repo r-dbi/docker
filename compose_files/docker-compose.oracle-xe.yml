@@ -1,0 +1,25 @@
+
+version: '3'
+
+include:
+ - docker-compose.db-oracle-xe.yml
+
+services:
+
+# -- ORACLE SERVICE --
+
+  rdb_oracle-xe:
+    container_name: rdb_oracle-xe
+    image: ghcr.io/krlmlr/rdb/r-oracle-xe
+    platform: linux/amd64
+    tty: true
+    stdin_open: true
+    depends_on:
+      oracle-xe:
+        condition: service_healthy
+    networks:
+      - oracle-network-xe
+    volumes:
+      # simple test
+      - ./test/test-oracle.R:/root/workspace/.Rprofile
+    entrypoint: ["R"]

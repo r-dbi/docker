@@ -10,3 +10,4 @@ include:
   - compose_files/docker-compose.postgres.yml
   - compose_files/docker-compose.sqlite.yml
   - compose_files/docker-compose.adbi.yml
+  - compose_files/docker-compose.oracle-xe.yml
