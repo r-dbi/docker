@@ -12,3 +12,4 @@ gh repo clone r-dbi/RSQLite
 gh repo clone r-dbi/RPostgres
 gh repo clone r-dbi/odbc
 gh repo clone r-dbi/adbi
+gh repo clone cynkra/dm
