@@ -11,3 +11,6 @@ RUN apt-get update
 
 RUN ACCEPT_EULA=Y apt-get install -y msodbcsql18
 
+RUN R -q -e 'keyring::keyring_create("system", ""); keyring::key_set_with_value("mssql", "dm-test-user", "SA"); keyring::key_set_with_value("mssql", "dm-test-password", "YourStrong!Passw0rd")'
+
+COPY odbc.ini /etc/odbc.ini
