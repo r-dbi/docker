@@ -7,7 +7,7 @@ services:
 
 # -- MSSQL SERVICE --
   rdb_mssql_test:
-    container_name: rdb_mssql
+    container_name: rdb_mssql_test
     image: ghcr.io/krlmlr/rdb/r-mssql
     platform: linux/amd64
     depends_on:
@@ -21,3 +21,33 @@ services:
       # simple test
       - ./test/test-mssql.R:/root/workspace/test.R
     entrypoint: ["Rscript", "/root/workspace/test.R"]
+
+  rdb_mssql:
+    container_name: rdb_mssql
+    image: ghcr.io/krlmlr/rdb/r-mssql
+    platform: linux/amd64
+    depends_on:
+      mssql:
+        condition: service_healthy
+    networks:
+      - mssql-network
+    tty: true
+    stdin_open: true
+    volumes:
+      - ../r-dbi/odbc/:/root/workspace/
+    entrypoint: ["R"]
+
+  rdb_mssql_all:
+    container_name: rdb_mssql_dm
+    image: ghcr.io/krlmlr/rdb/r-mssql
+    platform: linux/amd64
+    depends_on:
+      mssql:
+        condition: service_healthy
+    networks:
+      - mssql-network
+    tty: true
+    stdin_open: true
+    volumes:
+      - ../r-dbi/:/root/workspace/
+    entrypoint: ["R"]

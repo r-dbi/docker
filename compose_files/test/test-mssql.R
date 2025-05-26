@@ -20,3 +20,9 @@ if(class(con) == "try-error"){
   print('Connection Correctly Configured.')
 }
 
+DBI::dbConnect(
+  odbc::odbc(),
+  "dm-test",
+  uid = keyring::key_get("mssql", "dm-test-user"),
+  pwd = keyring::key_get("mssql", "dm-test-password")
+)
